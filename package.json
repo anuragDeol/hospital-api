@@ -1,5 +1,26 @@
 {
   "dependencies": {
-    "express": "^4.18.2"
-  }
+    "express": "^4.18.2",
+    "mongodb": "^4.11.0",
+    "mongoose": "^6.7.0",
+    "nodemon": "^2.0.20"
+  },
+  "name": "hospital-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anuragDeol/hospital-api.git"
+  },
+  "author": "anurag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anuragDeol/hospital-api/issues"
+  },
+  "homepage": "https://github.com/anuragDeol/hospital-api#readme",
+  "description": ""
 }
