@@ -10,22 +10,20 @@ let opts = {
     secretOrKey: 'hospital-api-secret-key'     // 'hospital-api-secret-key' is our encryption and decryption key
 }
 
-passport.use(
-    new JWTStrategy(opts, function(jwtPayLoad, done) {  // 'jwtPayLoad' contains the payload (which is inside the jwt token), and it contains doctor's info
-        Doctor.findById(jwtPayLoad._id, function(err, doctor) {
-            if(err) {
-                console.log(err);
-                return done(err);
-            }
+passport.use(new JWTStrategy(opts, function(jwtPayLoad, done) {  // 'jwtPayLoad' contains the payload (which is inside the jwt token), and it contains doctor's info
+    Doctor.findById(jwtPayLoad._id, function(err, doctor) {
+        if(err) {
+            console.log(err);
+            return done(err);
+        }
 
-            if(doctor) {
-                return done(null, doctor);
-            } else {
-                return done(null, false);
-            }
-        });
+        if(doctor) {
+            return done(null, doctor);
+        } else {
+            return done(null, false);
+        }
     });
-);
+}));
 
 
 module.exports = passport;
