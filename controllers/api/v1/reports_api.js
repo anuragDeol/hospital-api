@@ -1,7 +1,7 @@
 const Report = require('../../../models/report');
 const Patient = require('../../../models/patient');
 
-module.exports.createReport = async function(req, res) {
+module.exports.create = async function(req, res) {
     try {
         if(req.body.status == undefined) {
             return res.status(206).json({
@@ -21,7 +21,7 @@ module.exports.createReport = async function(req, res) {
         await patient.save();
 
         // populate doesn't work with '.create()'
-        // thus, finding the report (create just now)
+        // thus, finding the report (created just now)
         // and, populate it
         let newReport = await Report.findById(report._id).populate('doctor');
 
@@ -89,7 +89,7 @@ module.exports.findByStatus = async function(req, res) {
 
 
         return res.status(200).json({
-            message: "Reports of patients with status " + req.params.status,
+            message: "Reports of patients with status: " + req.params.status,
             data: {
                 reports: reports
             }

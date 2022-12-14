@@ -2,13 +2,18 @@ const Doctor = require('../../../models/doctor');
 const jwt = require('jsonwebtoken');
 
 module.exports.register = async function(req, res) {
+    console.log(req.body);
+    
     try {
         let doctor = await Doctor.findOne({
             username: req.body.username
         });
 
         if(!doctor) {
-            doctor = await Doctor.create(req.body);
+            doctor = await Doctor.create({
+                username: req.body.username,
+                password: req.body.password
+            });
 
             // converts document to js object - prevent password to be returned in json response
             doctor = doctor.toObject();
@@ -21,7 +26,7 @@ module.exports.register = async function(req, res) {
                 }
             });
         } else {
-            doctor = doctor.toObject();
+            doctor = doctor.toObject();     // convert into json object
             delete doctor.password;
 
             return res.json(409, {
@@ -32,7 +37,7 @@ module.exports.register = async function(req, res) {
             });
         }
     } catch(error) {
-        console.log("Oops! Error occured in registration", error);
+        console.log("Failed! Error occured in registration", error);
         return res.json(500, {
             message: "Internal Server Error"
         });
